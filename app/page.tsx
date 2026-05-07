@@ -13,7 +13,7 @@ export default function Home() {
     else if (percent > 40) type = "🟡 Balanced Thinker";
     else type = "🔴 Risk Taker";
 
-    setResult({ team, percent, type });
+    setResult({ team, percent, type });s
   };
 
   return (
