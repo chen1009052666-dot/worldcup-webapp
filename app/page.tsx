@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function Home() {
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<any>(null);
 
   const choose = (team: string) => {
     const percent = Math.floor(Math.random() * 80) + 10;
