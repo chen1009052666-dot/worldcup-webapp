@@ -3,62 +3,81 @@
 import { useState } from "react";
 
 export default function Home() {
-  const [result, setResult] = useState<any>({});
+  const [result, setResult] = useState<any>(null);
 
-  const choose = (team: string) => {
-    const percent = Math.floor(Math.random() * 80) + 10;
+  const predict = (team: string) => {
+    const percent = Math.floor(Math.random() * 100);
 
     let type = "";
-    if (percent > 70) type = "🟢 Safe Player";
-    else if (percent > 40) type = "🟡 Balanced Thinker";
+
+    if (percent > 70) type = "🟢 Football Expert";
+    else if (percent > 40) type = "🟡 Smart Fan";
     else type = "🔴 Risk Taker";
 
-    setResult({ team, percent, type });s
+    setResult({
+      team,
+      percent,
+      type,
+    });
   };
 
   return (
-    <div style={{
-      padding: 20,
-      textAlign: "center",
-      background: "#000",
-      color: "#fff",
-      height: "100vh"
-    }}>
-      
-      <h2>🇫🇷 France vs 🇦🇷 Argentina</h2>
+    <main
+      style={{
+        minHeight: "100vh",
+        background: "#0f172a",
+        color: "white",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 20,
+        textAlign: "center",
+      }}
+    >
+      <h1 style={{ fontSize: 40, marginBottom: 20 }}>
+        ⚽ World Cup Prediction
+      </h1>
 
-      <p>⚠️ Only 12% users choose this outcome</p>
+      <p style={{ marginBottom: 30 }}>
+        Choose your winner and see your fan level
+      </p>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-        <button onClick={() => choose("France Win")}>France Win</button>
-        <button onClick={() => choose("Draw")}>Draw</button>
-        <button onClick={() => choose("Argentina Win")}>Argentina Win</button>
+      <div style={{ display: "flex", gap: 20 }}>
+        <button
+          onClick={() => predict("France")}
+          style={{
+            padding: "15px 25px",
+            borderRadius: 12,
+            border: "none",
+            fontSize: 18,
+            cursor: "pointer",
+          }}
+        >
+          🇫🇷 France
+        </button>
+
+        <button
+          onClick={() => predict("Argentina")}
+          style={{
+            padding: "15px 25px",
+            borderRadius: 12,
+            border: "none",
+            fontSize: 18,
+            cursor: "pointer",
+          }}
+        >
+          🇦🇷 Argentina
+        </button>
       </div>
 
       {result && (
-        <div style={{ marginTop: 20, padding: 10, background: "#111" }}>
-          
-          <h3>🔥 TOP {result.percent}% risk level</h3>
-          <p>{result.type}</p>
-
-          <div style={{ marginTop: 10 }}>
-            My Prediction: {result.team} <br />
-            Only {result.percent}% agree
-          </div>
-
-          <button style={{
-            marginTop: 10,
-            padding: 10,
-            background: "#00c853",
-            color: "#fff",
-            border: "none"
-          }}>
-            🚀 Share Result
-          </button>
-
+        <div style={{ marginTop: 40 }}>
+          <h2>You picked: {result.team}</h2>
+          <h3>Confidence: {result.percent}%</h3>
+          <h2>{result.type}</h2>
         </div>
       )}
-
-    </div>
+    </main>
   );
 }
